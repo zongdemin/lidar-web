@@ -474,7 +474,7 @@ const userNav = options => {
       id: 1,
       meta: {
         icon: 'dashboard',
-        title: '仪表盘',
+        title: '扫描模式',
         show: true
       },
       component: 'RouteView',
@@ -485,28 +485,27 @@ const userNav = options => {
       parentId: 1,
       id: 7,
       meta: {
-        title: '工作台',
+        title: '垂直模式',
         show: true
       },
       component: 'Workplace'
     },
     {
       name: 'monitor',
-      path: 'https://www.baidu.com/',
       parentId: 1,
       id: 3,
       meta: {
-        title: '监控页（外部）',
-        target: '_blank',
+        title: '水平模式',
         show: true
-      }
+      },
+      component: 'Monitor'
     },
     {
       name: 'Analysis',
       parentId: 1,
       id: 2,
       meta: {
-        title: '分析页',
+        title: '走航模式',
         show: true
       },
       component: 'Analysis',

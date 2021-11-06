@@ -1,6 +1,12 @@
 <template>
-  <div id="cesiumContainer">
-  </div>
+  <page-header-wrapper
+    :tab-list="tabList"
+    :tab-active-key="tabActiveKey"
+    :tab-change="handleTabChange"
+  >
+    <div id="cesiumContainer">
+    </div>
+  </page-header-wrapper>
 </template>
 
 <script>
