@@ -23,14 +23,14 @@
       </a-form>
     </div>
     <div class="m-3" >
-      <el-row>
+      <a-row>>
         <div style="width:auto;margin:0;height:250px;" id="cvsMain1">
         </div>
-      </el-row >
-      <el-row >
+      </a-row >
+      <a-row >
         <div style="width:auto;margin:0;height: 250px;" id="cvsMain2">
         </div>
-      </el-row>
+      </a-row>
     </div>
   </a-layout >
 </template>
@@ -145,8 +145,8 @@ export default {
                 yaxis: 'y'
             }
           ]
-      Plotly.plot('cvsMain1', this.data, this.layout, this.config)
-      Plotly.plot('cvsMain2', this.data, this.layout, this.config)
+      Plotly.newPlot('cvsMain1', this.data, this.layout, this.config)
+      Plotly.newPlot('cvsMain2', this.data, this.layout, this.config)
     }
   },
   computed: {
