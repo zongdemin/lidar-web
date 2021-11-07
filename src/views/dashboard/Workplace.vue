@@ -1,38 +1,44 @@
 <template>
-  <a-layout  class="layout-right">
-    <div >
-      <a-form layout="horizontal">
-        <div >
-          <a-row >
-            <a-col :md="8" :sm="24" >
-              <a-form-item
-                label="查询时间"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}"
-              >
-                <a-range-picker show-time format="YYYY/MM/DD HH:mm:ss"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8" :sm="24">
-              <span style="float:right;margin-top:3px;">
-                <a-button type="primary">查询</a-button>
-              </span>
-            </a-col>
-          </a-row>
-        </div>
-      </a-form>
-    </div>
-    <div class="m-3" >
-      <a-row>>
-        <div style="width:auto;margin:0;height:250px;" id="cvsMain1">
-        </div>
-      </a-row >
-      <a-row >
-        <div style="width:auto;margin:0;height: 250px;" id="cvsMain2">
-        </div>
-      </a-row>
-    </div>
-  </a-layout >
+<page-header-wrapper
+    :tab-list="tabList"
+    :tab-active-key="tabActiveKey"
+    :tab-change="handleTabChange"
+  >
+    <a-layout  class="layout-right">
+      <div >
+        <a-form layout="horizontal">
+          <div >
+            <a-row >
+              <a-col :md="8" :sm="24" >
+                <a-form-item
+                  label="查询时间"
+                  :labelCol="{span: 5}"
+                  :wrapperCol="{span: 18, offset: 1}"
+                >
+                  <a-range-picker show-time format="YYYY/MM/DD HH:mm:ss"/>
+                </a-form-item>
+              </a-col>
+              <a-col :md="8" :sm="24">
+                <span style="float:right;margin-top:3px;">
+                  <a-button type="primary">查询</a-button>
+                </span>
+              </a-col>
+            </a-row>
+          </div>
+        </a-form>
+      </div>
+      <div class="m-3" >
+        <a-row>
+          <div style="width:1000px;margin:0;height:200px;" id="cvsMain1">
+          </div>
+        </a-row >
+        <a-row >
+          <div style="width:1000px;margin:0;height:200px;" id="cvsMain2">
+          </div>
+        </a-row>
+      </div>
+    </a-layout >
+  </page-header-wrapper>
 </template>
 <script>
 import Plotly from 'plotly.js/dist/plotly'
