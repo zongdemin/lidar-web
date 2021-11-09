@@ -1,36 +1,68 @@
 <template>
-  <a-layout :style="{ paddingLeft: contentLeft }" class="layout-right">
-    <div :class="advanced ? 'search' : null">
-      <a-form layout="horizontal">
-        <div :class="advanced ? null: 'fold'">
-          <a-row >
-            <a-col :md="8" :sm="24" >
-              <a-form-item
-                label="查询时间"
-                :labelCol="{span: 5}"
-                :wrapperCol="{span: 18, offset: 1}"
-              >
-                <a-range-picker show-time format="YYYY/MM/DD HH:mm:ss"/>
-              </a-form-item>
-            </a-col>
-            <a-col :md="8" :sm="24" >
-              <span style="float: right; margin-top: 3px;">
-                <a-button type="primary">查询</a-button>
+  <page-header-wrapper :tab-list="tabList" :tab-active-key="tabActiveKey" :tab-change="handleTabChange">
+    <div class="table-page-search-wrapper">
+      <a-form layout="inline">
+        <a-row :gutter="48">
+          <a-col :md="12" :sm="24">
+            <a-form-item label="查询时间">
+              <a-range-picker show-time format="YYYY/MM/DD HH:mm:ss" />
+            </a-form-item>
+          </a-col>
+          <a-col :md="8" :sm="12">
+            <a-form-item label="演算数据">
+              <a-select v-model="multiple" placeholder="请选择" default-value="[0, 1]" @change="onChange">
+                <a-select-option value="0">A通道原始信信号</a-select-option>
+                <a-select-option value="1">B通道原始信信号</a-select-option>
+                <a-select-option value="2">退偏比</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="24">
+            <a-form-item label="Max Length">
+              <a-input-number v-model="lazy" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="24">
+            <a-form-item label="Min Length">
+              <a-input-number v-model="lazy" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+           <a-col :md="6" :sm="24">
+            <a-form-item label="色谱柱最小值">
+              <a-input-number v-model="lazy" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :md="6" :sm="24">
+            <a-form-item label="色谱柱最大值">
+              <a-input-number v-model="lazy" style="width: 100%"/>
+            </a-form-item>
+          </a-col>
+          <a-col :md="!advanced && 8 || 24" :sm="24">
+            <span class="table-page-search-submitButtons" :style="advanced && { float: 'right', overflow: 'hidden' } || {} ">
+              <a-button type="primary" @click="$refs.table.refresh(true)">查询</a-button>
+              <a-button style="margin-left: 8px" @click="() => queryParam = {}">重置</a-button>
+              <a @click="toggleAdvanced" style="margin-left: 8px">
+                {{ advanced ? '收起' : '展开' }}
+                <a-icon :type="advanced ? 'up' : 'down'"/>
+              </a>
             </span>
-            </a-col>
-          </a-row>
-        </div>
+          </a-col>
+        </a-row>
       </a-form>
     </div>
-    <div class="m-3" >
-      <el-row >
-         <div style="width:auto;margin:0;height: 250px;" id="cvsMain1"></div>
-      </el-row >
-      <el-row >
-        <div style="width:auto;margin:0;height: 250px;" id="cvsMain2"></div>
-      </el-row>
-    </div>
-  </a-layout >
+    <a-layout  class="layout-right">
+      <div class="m-3" >
+        <a-row>
+          <div style="width:1000px;margin:0;height:200px;" id="cvsMain1">
+          </div>
+        </a-row >
+        <a-row >
+          <div style="width:1000px;margin:0;height:200px;" id="cvsMain2">
+          </div>
+        </a-row>
+      </div>
+    </a-layout >
+  </page-header-wrapper>
 </template>
 <script>
 import Plotly from 'plotly.js/dist/plotly'
@@ -68,7 +100,7 @@ export default {
               showexponent: 'first',
               mirror: true,
               tickangle: 0,
-              fixedrange: true, // 固定坐标轴范围
+              // fixedrange: true, // 固定坐标轴范围
               // autorange:true, // 点击坐标轴不会出现自适应范围
               zeroline: false
                 },
@@ -112,7 +144,9 @@ export default {
     fetchData () {
       this.data = [
             {
-                z: [[1, 20, 30], [20, 1, 60], [30, 60, 1]],
+                z: [[1, 4, 7], [2, 5, 8], [3, 6, 9]],
+                x: ['一', '二', '三'],
+                y: ['10', '100', '1000'],
                 colorscale: [
                       [0, 'rgb(0,0,139)'],
                       [0.2, 'rgb(0,0,255)'],
@@ -139,12 +173,15 @@ export default {
                 type: 'heatmap',
                 zsmooth: 'best',
                 zhoverformat: 'e',
-                xaxis: 'x',
-                yaxis: 'y'
+                xaxis: '时间',
+                yaxis: '高度'
             }
           ]
-      Plotly.plot('cvsMain1', this.data, this.layout, this.config)
-      Plotly.plot('cvsMain2', this.data, this.layout, this.config)
+      Plotly.newPlot('cvsMain1', this.data, this.layout, this.config)
+      Plotly.newPlot('cvsMain2', this.data, this.layout, this.config)
+    },
+    onChange (value) {
+      console.log('您选择了：' + value)
     }
   },
   computed: {

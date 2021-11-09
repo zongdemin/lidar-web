@@ -478,17 +478,17 @@ const userNav = options => {
         show: true
       },
       component: 'RouteView',
-      redirect: '/dashboard/workplace'
+      redirect: '/dashboard/verticalscanning'
     },
     {
-      name: 'workplace',
+      name: 'verticalscanning',
       parentId: 1,
       id: 7,
       meta: {
         title: '垂直模式',
         show: true
       },
-      component: 'Workplace'
+      component: 'VerticalScanning'
     },
     {
       name: 'monitor',
@@ -501,14 +501,14 @@ const userNav = options => {
       component: 'Monitor'
     },
     {
-      name: 'Analysis',
+      name: 'HorizontalScanning',
       parentId: 1,
       id: 2,
       meta: {
         title: '走航模式',
         show: true
       },
-      component: 'Analysis',
+      component: 'HorizontalScanning',
       path: '/dashboard/analysis'
     },
 

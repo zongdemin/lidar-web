@@ -15,8 +15,8 @@ const constantRouterComponents = {
   '500': () => import(/* webpackChunkName: "error" */ '@/views/exception/500'),
 
   // 你需要动态引入的页面组件
-  Workplace: () => import('@/views/dashboard/Workplace'),
-  Analysis: () => import('@/views/dashboard/Analysis'),
+  VerticalScanning: () => import('@/views/dashboard/VerticalScanning'),
+  HorizontalScanning: () => import('@/views/dashboard/HorizontalScanning'),
 
   // form
   BasicForm: () => import('@/views/form/basicForm'),
