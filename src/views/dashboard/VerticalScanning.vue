@@ -1,5 +1,5 @@
 <template>
-  <page-header-wrapper :tab-list="tabList" :tab-active-key="tabActiveKey" :tab-change="handleTabChange">
+  <page-header-wrapper >
     <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="48">
